@@ -1,15 +1,21 @@
-import type { NextPage } from 'next'
 import Layout from "../components/layout";
 import TopStories from "../components/topStories";
 
-const Home: NextPage = () => {
-  return (
-      <div>
-          <Layout home>
-            <TopStories />
-          </Layout>
-      </div>
-  )
+export default function Home(props: { data: string[]; }) {
+    return (
+        <div>
+            <Layout home>
+                <TopStories data={props.data}/>
+            </Layout>
+        </div>
+    );
 }
 
-export default Home
+export async function getServerSideProps() {
+    const data = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty')
+        .then((res) => res.json());
+
+    return {
+        props: { data }
+    };
+}

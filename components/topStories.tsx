@@ -1,42 +1,20 @@
-import {Alert, Spinner} from "flowbite-react";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import StoryItem from "./storyItem";
 
-export default function TopStories() {
+export default function TopStories({ data }: { data: string[] }) {
 
-    const [topStories, setTopStories] = useState<string[]>([]);
-    const [isLoading, setLoading] = useState(false)
+    if (!data) return null;
 
-    useEffect( () => {
-        const fetchQuote = async () => {
-            setLoading(true)
-            await fetch('/topstories')
-                .then((res) => res.json())
-                .then((topStoriesData) => {
-                    setTopStories(topStoriesData)
-                })
-        }
-        fetchQuote().then(() => {
-            setLoading(false)
-        });
-    }, [])
+    const [topStories, setTopStories] = useState<string[]>(data.splice(0, 50));
 
-    if (isLoading) {
-        return (
-            <div>
-                <Spinner size="xl" aria-label="loading top stories" />
-            </div>
-        )
-    }
-
-    if (!topStories) return <p>No top stories</p>
+    if (!topStories) return null;
 
     return (
         <div>
             <ul className="list-none">
                 {topStories.map(topStory => (
                     <li key={topStory}>
-                        <StoryItem storyId={topStory} />
+                        <StoryItem storyId={topStory}/>
                     </li>
                 ))}
             </ul>
