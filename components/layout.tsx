@@ -11,7 +11,7 @@ export default function Layout({
     home?: boolean
 }) {
     return (
-        <div className="container">
+        <div className="container mx-auto">
             <Head>
                 <title>{siteTitle}</title>
                 <link rel="icon" href="/favicon.ico"/>

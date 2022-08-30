@@ -5,12 +5,12 @@ export default function TopStories({ data }: { data: string[] }) {
 
     if (!data) return null;
 
-    const [topStories, setTopStories] = useState<string[]>(data.splice(0, 50));
+    const [topStories, setTopStories] = useState<string[]>(data.slice(0, 30));
 
     if (!topStories) return null;
 
     return (
-        <div>
+        <div className="p-2">
             <ul className="list-none">
                 {topStories.map(topStory => (
                     <li key={topStory}>

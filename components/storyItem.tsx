@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Spinner} from "flowbite-react";
+import {Card, Spinner} from "flowbite-react";
 import {Story} from "../models/story";
 
 export default function StoryItem({ storyId }: { storyId: string }) {
@@ -30,9 +30,18 @@ export default function StoryItem({ storyId }: { storyId: string }) {
 
     if (!story) return <p>No story</p>
 
+    const dateTime = story.time ? new Date(story.time * 1000).toLocaleDateString("en-US") : '';
+
     return (
-        <div>
-            {story.title}
+        <div className="p-2">
+            <Card href={story.url}>
+                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {story.title}
+                </h5>
+                <p className="font-normal text-gray-700 dark:text-gray-400">
+                    {story.score} points by {story.by} | {dateTime} | {story.kids?.length} comments
+                </p>
+            </Card>
         </div>
     )
 
