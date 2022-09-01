@@ -12,9 +12,9 @@ export default function TopStories({ data }: { data: string[] }) {
     return (
         <div className="p-2">
             <ul className="list-none">
-                {topStories.map(topStory => (
+                {topStories.map((topStory, index) => (
                     <li key={topStory}>
-                        <StoryItem storyId={topStory}/>
+                        <StoryItem storyId={topStory} rank={index+1}/>
                     </li>
                 ))}
             </ul>

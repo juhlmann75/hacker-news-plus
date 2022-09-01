@@ -14,10 +14,10 @@ export default function Layout({
         <div className="container mx-auto">
             <Head>
                 <title>{siteTitle}</title>
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href="/hacker-news-brands.png"/>
                 <meta
                     name="description"
-                    content="Hacker News Plus"
+                    content="Hacker News Plus is a modern UI to consume Hacker News content"
                 />
                 <meta name="og:title" content={siteTitle}/>
             </Head>
