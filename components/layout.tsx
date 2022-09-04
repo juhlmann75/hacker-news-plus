@@ -1,19 +1,25 @@
 import Head from 'next/head';
 import React from "react";
+import TopNavbar from "./topNavbar";
 
 export const siteTitle = 'Hacker News Plus';
 
 export default function Layout({
                                    children,
-                                   home
+                                   home,
+                                   title
                                }: {
     children: React.ReactNode,
-    home?: boolean
+    home?: boolean,
+    title?: string
 }) {
+
+    const titleTagValue = title ? title + ' | Hacker News Plus' : siteTitle;
+
     return (
-        <div className="container mx-auto">
+        <div>
             <Head>
-                <title>{siteTitle}</title>
+                <title>{titleTagValue}</title>
                 <link rel="icon" href="/hacker-news-brands.png"/>
                 <meta
                     name="description"
@@ -22,7 +28,10 @@ export default function Layout({
                 <meta name="og:title" content={siteTitle}/>
             </Head>
             <main>
-                {children}
+                <TopNavbar></TopNavbar>
+                <div className="container mx-auto">
+                    {children}
+                </div>
             </main>
         </div>
     );

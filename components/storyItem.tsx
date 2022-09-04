@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import {Card} from "flowbite-react";
 import {Story} from "../models/story";
+import Link from "next/link";
+import {FaExternalLinkAlt} from "react-icons/fa";
 
 export default function StoryItem({storyId, rank}: { storyId: string, rank: number }) {
     const [story, setStory] = useState<Story>();
@@ -34,8 +36,21 @@ export default function StoryItem({storyId, rank}: { storyId: string, rank: numb
 
     if (!story) return null;
 
-    const storyLink = story.url ? story.url : '/';
     const dateTime = story.time ? new Date(story.time * 1000).toLocaleDateString("en-US") : '';
+
+    let storyLink = (<div></div>)
+    if (story.url) {
+        let domain = new URL(story.url);
+        let domainString: string = domain.hostname.replace('www.','').toString();
+        storyLink = (
+            <a href={story.url} target="_blank" className="hover:underline visited:text-gray-400 dark:visited:text-gray-500">
+                <div className="flex items-center">
+                    <p className="truncate">{domainString}</p>
+                    <FaExternalLinkAlt className="ml-2 w-4 h-4"/>
+                </div>
+            </a>
+        );
+    }
 
     return (
         <div className="p-2">
@@ -45,13 +60,19 @@ export default function StoryItem({storyId, rank}: { storyId: string, rank: numb
                         {rank}.
                     </h4>
                     <div>
-                        <a href={storyLink} target="_blank"
-                           className="hover:underline text-2xl font-bold tracking-tight text-gray-900 visited:text-gray-400 dark:text-white dark:visited:text-gray-500">
-                            {story.title}
-                        </a>
-                        <p className="font-normal text-gray-700 dark:text-gray-400">
-                            {story.score} points by {story.by} | {dateTime} | {story.kids?.length} comments
-                        </p>
+                        <Link href={`/post/${story.id}`}>
+                            <a className="text-2xl font-bold tracking-tight text-gray-900 visited:text-gray-400 dark:text-white dark:visited:text-gray-500">
+                                <p>{story.title}</p>
+                            </a>
+                        </Link>
+                        {storyLink}
+                        <Link href={`/post/${story.id}`} target='_blank'>
+                            <a target='_blank'>
+                                <p className="font-normal text-gray-700 dark:text-gray-400">
+                                    {story.score} points by {story.by} | {dateTime} | {story.kids?.length} comments
+                                </p>
+                            </a>
+                        </Link>
                     </div>
                 </div>
             </Card>

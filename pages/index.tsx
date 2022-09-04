@@ -5,7 +5,6 @@ import TopNavbar from "../components/topNavbar";
 export default function Home(props: { data: string[]; }) {
     return (
         <div>
-            <TopNavbar></TopNavbar>
             <Layout home>
                 <TopStories data={props.data}/>
             </Layout>

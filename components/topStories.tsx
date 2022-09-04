@@ -1,7 +1,8 @@
 import {useState} from "react";
 import StoryItem from "./storyItem";
+import Link from "next/link";
 
-export default function TopStories({ data }: { data: string[] }) {
+export default function TopStories({data}: { data: string[] }) {
 
     if (!data) return null;
 
@@ -14,7 +15,7 @@ export default function TopStories({ data }: { data: string[] }) {
             <ul className="list-none">
                 {topStories.map((topStory, index) => (
                     <li key={topStory}>
-                        <StoryItem storyId={topStory} rank={index+1}/>
+                        <StoryItem storyId={topStory} rank={index + 1}/>
                     </li>
                 ))}
             </ul>
