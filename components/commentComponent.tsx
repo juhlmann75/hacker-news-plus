@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {CommentItem} from "../models/commentItem";
 import {Card} from "flowbite-react";
 
-export default function CommentComponent({commentId, rank}: { commentId: number, rank: number }) {
+export default function CommentComponent({commentId}: { commentId: number }) {
     const [comment, setComment] = useState<CommentItem>();
     const [isLoading, setLoading] = useState(false)
 
@@ -37,11 +37,16 @@ export default function CommentComponent({commentId, rank}: { commentId: number,
     const dateTime = comment.time ? new Date(comment.time * 1000).toLocaleDateString("en-US") : '';
 
     return (
-        <div className="m-4">
-            <Card>
-                <div dangerouslySetInnerHTML={{__html: comment.text}}></div>
-                <p>- {comment.by}</p>
-            </Card>
+        <div className="p-4 border-l-2 m-2">
+            <div dangerouslySetInnerHTML={{__html: comment.text}}></div>
+            <p>- {comment.by}</p>
+            <ul>
+                {comment.kids?.map((kidCommentId) => (
+                    <li key={kidCommentId}>
+                        <CommentComponent commentId={kidCommentId}/>
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 

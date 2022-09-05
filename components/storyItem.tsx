@@ -43,12 +43,13 @@ export default function StoryItem({storyId, rank}: { storyId: string, rank: numb
         let domain = new URL(story.url);
         let domainString: string = domain.hostname.replace('www.','').toString();
         storyLink = (
-            <a href={story.url} target="_blank" className="hover:underline visited:text-gray-400 dark:visited:text-gray-500">
-                <div className="flex items-center">
+            <div className="flex items-center">
+                <a href={story.url} target="_blank"
+                   className="hover:underline visited:text-gray-400 dark:visited:text-gray-500">
                     <p className="truncate">{domainString}</p>
-                    <FaExternalLinkAlt className="ml-2 w-4 h-4"/>
-                </div>
-            </a>
+                </a>
+                <FaExternalLinkAlt className="ml-2 w-4 h-4"/>
+            </div>
         );
     }
 

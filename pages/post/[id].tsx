@@ -36,9 +36,9 @@ export default function Item(props: { data: Story }) {
                     {story.score} points by {story.by} | {dateTime} | {story.descendants} comments
                 </p>
                 <ul>
-                    {story.kids?.map((commentId, index) => (
+                    {story.kids?.map((commentId) => (
                         <li key={commentId}>
-                            <CommentComponent commentId={commentId} rank={index}/>
+                            <CommentComponent commentId={commentId} />
                         </li>
                     ))}
 
