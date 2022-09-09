@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import {CommentItem} from "../models/commentItem";
-import {Card} from "flowbite-react";
 
 export default function CommentComponent({commentId}: { commentId: number }) {
     const [comment, setComment] = useState<CommentItem>();
@@ -37,9 +36,9 @@ export default function CommentComponent({commentId}: { commentId: number }) {
     const dateTime = comment.time ? new Date(comment.time * 1000).toLocaleDateString("en-US") : '';
 
     return (
-        <div className="p-4 border-l-2 m-2">
-            <div dangerouslySetInnerHTML={{__html: comment.text}}></div>
-            <p>- {comment.by}</p>
+        <div className="p-3 border-l-2 m-2 pr-0 mr-0 dark:border-l-gray-500">
+            <p className="text-sm pb-2 dark:text-gray-300 text-gray-800">{comment.by} {dateTime}</p>
+            <div dangerouslySetInnerHTML={{__html: comment.text}} className="overflow-x-scroll"></div>
             <ul>
                 {comment.kids?.map((kidCommentId) => (
                     <li key={kidCommentId}>
